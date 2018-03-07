@@ -1,0 +1,6 @@
+<design:component label="File Manager">
+	<design:attribute name="title" 
+                      label="Component Title" 
+                      description="Title of the component" 
+                      default="File Manager"/>
+</design:component>

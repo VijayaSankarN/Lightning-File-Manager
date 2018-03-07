@@ -1,0 +1,31 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" 
+                controller="FileManagerController_AC"
+                access="global" >
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="fileList" type="List"/>
+    <aura:attribute name="title" type="String"/>
+    
+    <lightning:notificationsLibrary aura:id="notifLib" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.checkFileList}" />
+    
+    <lightning:card title="{!v.title}">
+        <div class="slds-align_absolute-center">
+            <lightning:fileUpload label="Attach files"
+                                  multiple="true"
+                                  recordId="{!v.recordId}"
+                                  onuploadfinished="{!c.handleUploadFinished}" />
+        </div>
+        
+        <aura:iteration items="{!v.fileList}" var="file">
+            <div class="slds-align_absolute-center slds-m-top_x-small">
+                <lightning:buttonIcon iconName="utility:delete" 
+                                      variant="brand" 
+                                      alternativeText="Delete File" 
+                                      value="{!file.ContentDocumentId}" 
+                                      onclick="{!c.deleteFile}"/>
+                <lightning:fileCard fileId="{!file.ContentDocumentId}"/>
+            </div>
+        </aura:iteration>
+    </lightning:card>
+</aura:component>
